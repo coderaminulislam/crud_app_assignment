@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _getProductInProgress = false;
     setState(() {});
     String deleteProductUrl =
-        'https://crud.teamrabbil.com/api/v1/DeleteProduct/${productModelsId}';
+        'https://crud.teamrabbil.com/api/v1/DeleteProduct/$productModelsId';
     Uri uri = Uri.parse(deleteProductUrl);
     Response response = await get(uri);
 
