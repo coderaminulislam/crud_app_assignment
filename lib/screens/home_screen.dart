@@ -18,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    super.initState();
     _getProductList();
+    super.initState();
   }
 
   @override
@@ -38,9 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: const Icon(Icons.add),
       ),
-      body: SingleChildScrollView(
-        child: RefreshIndicator(
-          onRefresh: _getProductList,
+      body: RefreshIndicator(
+        onRefresh: _getProductList,
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -108,13 +108,16 @@ class _HomeScreenState extends State<HomeScreen> {
       trailing: Wrap(
         children: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+               final result= await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
                           UpdateScreen(productModel: productModel),
                     ));
+                if (result == true) {
+                  _getProductList();
+                }
               },
               icon: const Icon(Icons.edit)),
           IconButton(
@@ -125,7 +128,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      leading: Image.network(  'https://fossil.scene7.com/is/image/FossilPartners/FS5304_main?',),
+      leading: Column(
+        children: [
+         if(productModel.img == true)...[
+           Image.network('${productModel.img}', width: 60,),
+         ]
+
+         else...[
+           Image.asset('assets/image/demo.jpg', width: 40,)
+         ]
+
+        ],
+      )
     );
   }
 
