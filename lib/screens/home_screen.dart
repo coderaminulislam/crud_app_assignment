@@ -129,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+
   Future<void> _getProductList() async {
     _getProductInProgress = true;
     productList.clear();
