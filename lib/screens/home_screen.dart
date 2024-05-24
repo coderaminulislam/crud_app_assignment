@@ -131,8 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: SizedBox(
           width: 40,
           child: Image.network(
-              '${productModel.img}',
-              width: 40,
+            '${productModel.img}',
+            width: 40,
           ),
         ));
   }
