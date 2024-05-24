@@ -95,54 +95,47 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _productItemBuild(ProductModel productModel) {
     return ListTile(
-      title: Text(productModel.productName ?? 'unknown'),
-      subtitle: Wrap(
-        children: [
-          Text('QTY: ${productModel.qty}'),
-          const SizedBox(width: 10),
-          Text('Unit Price: ${productModel.unitPrice}'),
-          const SizedBox(width: 10),
-          Text('Total Price: ${productModel.totalPrice}'),
-        ],
-      ),
-      trailing: Wrap(
-        children: [
-          IconButton(
-              onPressed: () async {
-               final result= await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          UpdateScreen(productModel: productModel),
-                    ));
-                if (result == true) {
-                  _getProductList();
-                }
+        title: Text(productModel.productName ?? 'unknown'),
+        subtitle: Wrap(
+          children: [
+            Text('QTY: ${productModel.qty}'),
+            const SizedBox(width: 10),
+            Text('Unit Price: ${productModel.unitPrice}'),
+            const SizedBox(width: 10),
+            Text('Total Price: ${productModel.totalPrice}'),
+          ],
+        ),
+        trailing: Wrap(
+          children: [
+            IconButton(
+                onPressed: () async {
+                  final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            UpdateScreen(productModel: productModel),
+                      ));
+                  if (result == true) {
+                    _getProductList();
+                  }
+                },
+                icon: const Icon(Icons.edit)),
+            IconButton(
+              onPressed: () {
+                _showDeleteBox(productModel.sId!);
               },
-              icon: const Icon(Icons.edit)),
-          IconButton(
-            onPressed: () {
-              _showDeleteBox(productModel.sId!);
-            },
-            icon: const Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
+            ),
+          ],
+        ),
+        leading: SizedBox(
+          width: 40,
+          child: Image.network(
+              '${productModel.img}',
+              width: 40,
           ),
-        ],
-      ),
-      leading: Column(
-        children: [
-         if(productModel.img == true)...[
-           Image.network('${productModel.img}', width: 60,),
-         ]
-
-         else...[
-           Image.asset('assets/image/demo.jpg', width: 40,)
-         ]
-
-        ],
-      )
-    );
+        ));
   }
-
 
   Future<void> _getProductList() async {
     _getProductInProgress = true;

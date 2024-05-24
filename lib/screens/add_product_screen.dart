@@ -105,7 +105,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                   TextFormField(
                     controller: _imageTEController,
-
+                    keyboardType: TextInputType.url,
                     decoration: const InputDecoration(labelText: 'Image'),
                     validator: (String? value) {
                       if (value == null || value.trim().isEmpty) {
